@@ -4,35 +4,24 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local survivor = {}
 
+function survivor.placeWall(player)
+    local character = player.Character
+    if character and character:FindFirstChild("HumanoidRootPart") then
+        local rootPart = character.HumanoidRootPart
+        local wall = Instance.new("Part")
+        wall.Name = "Wall"
+        wall.Size = Vector3.new(10, 10, 1)
+        wall.Position = rootPart.Position + (rootPart.CFrame.LookVector * 10)
+        wall.Anchored = true
+        wall.BrickColor = BrickColor.new("Bright blue")
+        wall.Parent = game.Workspace
+
+        -- Make the wall disappear after a short time
+        game.Debris:AddItem(wall, 5)
+    end
+end
+
 function survivor.createAbilities(player)
-    -- Create the "place wall" ability
-    local placeWallTool = Instance.new("Tool")
-    placeWallTool.Name = "PlaceWall"
-    placeWallTool.ToolTip = "Place a wall to block the killer."
-    placeWallTool.Parent = player.Backpack
-
-    local handle = Instance.new("Part")
-    handle.Name = "Handle"
-    handle.Size = Vector3.new(1, 1, 1)
-    handle.Parent = placeWallTool
-
-    placeWallTool.Activated:Connect(function()
-        local character = player.Character
-        if character and character:FindFirstChild("HumanoidRootPart") then
-            local rootPart = character.HumanoidRootPart
-            local wall = Instance.new("Part")
-            wall.Name = "Wall"
-            wall.Size = Vector3.new(10, 10, 1)
-            wall.Position = rootPart.Position + (rootPart.CFrame.LookVector * 10)
-            wall.Anchored = true
-            wall.BrickColor = BrickColor.new("Bright blue")
-            wall.Parent = game.Workspace
-
-            -- Make the wall disappear after a short time
-            game.Debris:AddItem(wall, 5)
-        end
-    end)
-
     -- Create the "stun rocket" ability
     local stunRocketTool = Instance.new("Tool")
     stunRocketTool.Name = "StunRocket"

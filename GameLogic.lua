@@ -95,12 +95,41 @@ end)
 local survivorEvent = ReplicatedStorage:WaitForChild("SurvivorChosen")
 local killerEvent = ReplicatedStorage:WaitForChild("KillerChosen")
 
+local placeWallEvent = Instance.new("RemoteEvent")
+placeWallEvent.Name = "PlaceWallEvent"
+placeWallEvent.Parent = ReplicatedStorage
+
 local Survivor = require(game.ServerScriptService.Survivor)
+
+placeWallEvent.OnServerEvent:Connect(function(player)
+    local isSurvivor = false
+    for _, survivorPlayer in ipairs(survivors) do
+        if survivorPlayer == player then
+            isSurvivor = true
+            break
+        end
+    end
+
+    if isSurvivor then
+        Survivor.placeWall(player)
+    end
+end)
 
 survivorEvent.OnServerEvent:Connect(function(player)
     print(player.Name .. " is a Survivor")
     table.insert(survivors, player)
     Survivor.createAbilities(player)
+
+    -- Give the survivor the controls script
+    local survivorControlsScript = game.ServerScriptService:FindFirstChild("SurvivorControls")
+    if survivorControlsScript then
+        local playerScripts = player:WaitForChild("PlayerScripts")
+        if not playerScripts:FindFirstChild("SurvivorControls") then
+            survivorControlsScript:Clone().Parent = playerScripts
+        end
+    else
+        warn("SurvivorControls.lua script not found in ServerScriptService!")
+    end
 end)
 
 local Killer = require(game.ServerScriptService.Killer)

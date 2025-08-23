@@ -28,6 +28,14 @@ To set up the game in Roblox Studio, follow these steps:
 2.  Create a new `LocalScript` inside `StarterPlayerScripts`. You can name it `RoleSelection`.
 3.  Copy the contents of `RoleSelection.lua` and paste them into the new script.
 
+### 5. Survivor Controls Script
+
+This script handles keybinds for survivors. It is stored on the server and given to players who choose the survivor role.
+
+1.  In `ServerScriptService`, create a new `LocalScript` and name it `SurvivorControls`.
+2.  Copy the contents of the `SurvivorControls.lua` file and paste them into the new script.
+3.  Make sure the script is **disabled** so it doesn't try to run on the server. The `GameLogic` script will clone it to the players that need it.
+
 ## How to Play
 
 1.  Press `Play` in Roblox Studio.
