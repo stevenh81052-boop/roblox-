@@ -22,14 +22,11 @@ To set up the game in Roblox Studio, follow these steps:
 1.  In the `ServerScriptService`, create a new script named `GameLogic`.
 2.  Copy the contents of `GameLogic.lua` and paste them into the new script.
 
-### 4. UI Message Script (LocalScript)
-
-The `GameLogic.lua` script includes the code for a `LocalScript` that displays messages on the player's screen. You need to create this script manually:
+### 4. Role Selection Script (LocalScript)
 
 1.  In the `StarterPlayer` service, find the `StarterPlayerScripts` folder.
-2.  Create a new `LocalScript` inside `StarterPlayerScripts`. You can name it `UIMessageHandler`.
-3.  Open the `GameLogic.lua` script you created earlier and find the `localScript` variable. Copy the entire block of code inside the `[[ ... ]]` brackets.
-4.  Paste this code into the `UIMessageHandler` `LocalScript`.
+2.  Create a new `LocalScript` inside `StarterPlayerScripts`. You can name it `RoleSelection`.
+3.  Copy the contents of `RoleSelection.lua` and paste them into the new script.
 
 ## How to Play
 
